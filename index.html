@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ali Mehdi – Intelligent Robotics & ML Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio of Ali Mehdi – Intelligent Robotics, Machine Learning and Data-driven systems." />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.2);
+      --accent-strong: #22d3ee;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --card: #0b1220;
+      --border: #1f2933;
+      --danger: #f97373;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 60px rgba(15, 23, 42, 0.85);
+      --shadow-glow: 0 0 40px rgba(79, 70, 229, 0.55);
+      --transition-fast: 200ms ease;
+      --transition-med: 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+      background: radial-gradient(circle at top left, #1f2937 0, #050816 38%, #020617 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, var(--accent), var(--accent-strong));
+      border-radius: 999px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+      position: relative;
+    }
+
+    /* Floating gradient orbs */
+    .orb {
+      position: fixed;
+      border-radius: 999px;
+      filter: blur(60px);
+      opacity: 0.75;
+      z-index: -2;
+      pointer-events: none;
+    }
+    .orb--1 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, #4f46e5, transparent 65%);
+      top: -40px;
+      right: 5%;
+      animation: float1 18s ease-in-out infinite alternate;
+    }
+    .orb--2 {
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, #22c55e, transparent 65%);
+      bottom: -60px;
+      left: 0;
+      animation: float2 22s ease-in-out infinite alternate;
+    }
+    .orb--3 {
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, #22d3ee, transparent 65%);
+      top: 40%;
+      left: -80px;
+      animation: float3 26s ease-in-out infinite alternate;
+    }
+
+    @keyframes float1 {
+      to { transform: translate3d(-40px, 30px, 0); opacity: 0.6; }
+    }
+    @keyframes float2 {
+      to { transform: translate3d(50px, -20px, 0); opacity: 0.55; }
+    }
+    @keyframes float3 {
+      to { transform: translate3d(30px, 60px, 0); opacity: 0.5; }
+    }
+
+    /* Top bar */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      position: sticky;
+      top: 0;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.96), rgba(3,7,18,0.98));
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      backdrop-filter: blur(22px);
+      z-index: 20;
+    }
+
+    .nav__left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav__badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 0, #22d3ee, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b1120;
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.9);
+    }
+
+    .nav__title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav__name {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 14px;
+    }
+
+    .nav__role {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 6px 11px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all var(--transition-med);
+    }
+
+    .chip--primary {
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), rgba(15,23,42,0.9));
+      color: #e0f2fe;
+    }
+
+    .chip:hover {
+      border-color: rgba(56, 189, 248, 0.8);
+      color: #e5f0ff;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.9);
+    }
+
+    /* Layout */
+    .hero {
+      display: grid;
+      grid-template-columns: 3fr 2.4fr;
+      gap: 32px;
+      margin-bottom: 40px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 840px) {
+      .nav {
+        border-radius: 18px;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.96), rgba(3,7,18,0.98));
+      border-radius: var(--radius-lg);
+      padding: 24px 22px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      border: 1px solid transparent;
+      background: linear-gradient(120deg, rgba(56,189,248,0.16), transparent, rgba(129,140,248,0.18));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      padding: 1px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .card--highlight {
+      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.22), rgba(15,23,42,0.96));
+      box-shadow: var(--shadow-glow);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.96), rgba(3,7,18,0.98));
+    }
+
+    .pill span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom right, #22d3ee, #4f46e5);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.9);
+    }
+
+    .heading-xl {
+      font-size: clamp(26px, 4vw, 32px);
+      font-weight: 650;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
+    .heading-xl span.highlight {
+      background: linear-gradient(to right, #22d3ee, #4f46e5);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero__subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 38rem;
+      margin-bottom: 18px;
+    }
+
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero__meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .hero__meta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #16a34a);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.85);
+    }
+
+    .hero__meta-badge {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22d3ee, #4f46e5);
+      box-shadow: 0 0 10px rgba(59,130,246,0.9);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      font-size: 13px;
+      padding: 9px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text);
+      transition: all var(--transition-med);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn--primary {
+      border-color: transparent;
+      background: linear-gradient(120deg, #22d3ee, #4f46e5);
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.6);
+      color: #0b1120;
+      font-weight: 600;
+    }
+
+    .btn--ghost {
+      background: rgba(15, 23, 42, 0.94);
+    }
+
+    .btn span.icon {
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn--primary:hover {
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.75);
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.12), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .hero__right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero__avatar-card {
+      display: grid;
+      grid-template-columns: 1.15fr 1.6fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .hero__avatar-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .avatar-frame {
+      position: relative;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.14), rgba(15,23,42,0.9));
+      padding: 4px;
+      overflow: hidden;
+      min-height: 160px;
+    }
+
+    .avatar-inner {
+      border-radius: 18px;
+      background: linear-gradient(145deg, #020617, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-align: center;
+      padding: 14px;
+    }
+
+    .avatar-inner::after {
+      content: "Ali builds intelligent systems that see, move and decide.";
+      position: absolute;
+      inset: auto 16px 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(148, 163, 184, 0.9);
+      text-align: left;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: 16px;
+      border-radius: inherit;
+      border: 1px dashed rgba(148, 163, 184, 0.32);
+      pointer-events: none;
+    }
+
+    .avatar-orbit {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22d3ee, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b1120;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      box-shadow: 0 0 24px rgba(56,189,248,0.9);
+      animation: orbit 18s linear infinite;
+      transform-origin: 120px 120px;
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+    }
+
+    .hero__avatar-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero__badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .badge {
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--muted);
+      background: rgba(15,23,42,0.95);
+    }
+
+    .badge--accent {
+      border-color: rgba(56, 189, 248, 0.9);
+      color: #e0f2fe;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.3), rgba(15,23,42,0.98));
+    }
+
+    .hero__timeline {
+      display: grid;
+      grid-template-columns: 2.2fr 2fr;
+      gap: 20px;
+      font-size: 11px;
+    }
+
+    .mini-section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .timeline-list {
+      border-left: 1px solid rgba(148, 163, 184, 0.35);
+      padding-left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -13px;
+      top: 4px;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22d3ee, #4f46e5);
+      box-shadow: 0 0 16px rgba(56,189,248,0.9);
+    }
+
+    .timeline-title {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .timeline-meta {
+      color: var(--muted);
+    }
+
+    /* Section: Projects and skills */
+    .section {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 3fr 2.2fr;
+      gap: 22px;
+    }
+
+    @media (max-width: 840px) {
+      .section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section__title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .section__title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .section__eyebrow {
+      font-size: 11px;
+      color: rgba(148, 163, 184, 0.85);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-card {
+      border-radius: var(--radius-md);
+      padding: 14px 13px 13px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.96), rgba(3,7,18,0.98));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background 260ms ease;
+      cursor: default;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px) translateZ(0);
+      box-shadow: 0 16px 38px rgba(15, 23, 42, 0.95);
+      border-color: rgba(56, 189, 248, 0.7);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), rgba(3,7,18,0.98));
+    }
+
+    .project-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .project-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .project-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #16a34a);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.85);
+    }
+
+    .project-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .project-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      font-size: 10px;
+      color: #cbd5f5;
+    }
+
+    .tag {
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(129, 140, 248, 0.65);
+    }
+
+    .section__skills {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 14px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .skill-chip {
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .skill-chip span.label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 10px;
+    }
+
+    .skill-chip span.value {
+      color: #e5e7eb;
+    }
+
+    .skill-bar {
+      margin-top: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-bar-fill {
+      position: absolute;
+      inset: 0;
+      transform-origin: left;
+      transform: scaleX(0);
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22d3ee, #4f46e5);
+      box-shadow: 0 0 20px rgba(56,189,248,0.8);
+      animation: grow 1.1s ease-out forwards;
+    }
+
+    .skill-bar-fill--80 { animation-delay: 0.08s; }
+    .skill-bar-fill--85 { animation-delay: 0.16s; }
+    .skill-bar-fill--70 { animation-delay: 0.24s; }
+    .skill-bar-fill--60 { animation-delay: 0.32s; }
+
+    @keyframes grow {
+      to { transform: scaleX(1); }
+    }
+
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(15,23,42,0.96);
+      color: var(--muted);
+    }
+
+    .cert-item span.name {
+      font-size: 11px;
+    }
+
+    .cert-item span.tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #bfdbfe;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+      padding-top: 16px;
+      border-top: 1px solid rgba(30, 64, 175, 0.6);
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer__link {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15,23,42,0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .footer__link:hover {
+      border-color: rgba(56, 189, 248, 0.8);
+      color: #e0f2fe;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15,23,42,0.9);
+    }
+
+    .footer__link span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22d3ee, #4f46e5);
+    }
+
+    /* Enter animations */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 500ms ease-out, transform 500ms ease-out;
+    }
+
+    [data-animate].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Smooth section spacing on small screens */
+    @media (max-width: 640px) {
+      main {
+        padding-inline: 16px;
+      }
+      .card {
+        padding: 18px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb--1"></div>
+  <div class="orb orb--2"></div>
+  <div class="orb orb--3"></div>
+
+  <main>
+    <!-- Top nav -->
+    <header class="nav">
+      <div class="nav__left">
+        <div class="nav__badge">AM</div>
+        <div class="nav__title">
+          <span class="nav__name">Ali Mehdi</span>
+          <span class="nav__role">Intelligent Robotics · ML · Data</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <button class="chip chip--primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+          View projects
+        </button>
+        <button class="chip" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          Contact
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <article class="card card--highlight" data-animate>
+        <div class="pill-row">
+          <div class="pill">
+            <span class="dot"></span>
+            <span>Final-year · Intelligent Robotics</span>
+          </div>
+          <div class="pill">
+            <span class="dot"></span>
+            <span>Kaunas, Lithuania</span>
+          </div>
+        </div>
+
+        <h1 class="heading-xl">
+          Designing systems that <span class="highlight">see, decide,</span> and act.
+        </h1>
+
+        <p class="hero__subtitle">
+          I build machine learning–driven robotics and data systems, from sensor pipelines to explainable deep learning models, turning raw data into decisions, dashboards, and deployed behaviour.
+        </p>
+
+        <div class="hero__meta">
+          <div class="hero__meta-item">
+            <span class="hero__meta-dot"></span>
+            <span>Open to 2026 roles in ML engineering, data science & robotics</span>
+          </div>
+          <div class="hero__meta-item">
+            <span class="hero__meta-badge"></span>
+            <span>Azure AI-900 certified · Cisco CyberOps · Huawei AI Talent</span>
+          </div>
+        </div>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#projects">
+            <span class="icon">⬤</span>
+            <span>Explore selected work</span>
+          </a>
+          <a class="btn btn--ghost" id="emailBtn">
+            <span class="icon">✉️</span>
+            <span>Copy email</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Hero right panel -->
+      <aside class="hero__right">
+        <article class="card hero__avatar-card" data-animate>
+          <div class="avatar-frame">
+            <div class="avatar-inner">
+              <div class="avatar-ring"></div>
+              <div class="avatar-orbit">
+                KTU
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:500;margin-bottom:4px;">
+                  Intelligent Robotics · Data pipelines
+                </div>
+                <div style="font-size:12px;color:var(--muted);">
+                  Python · PyTorch · TensorFlow · ROS2 · web dashboards · embedded sensors.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__avatar-meta">
+            <div class="hero__badge-row">
+              <span class="badge badge--accent">Bachelor thesis: Deep learning for pneumonia detection</span>
+              <span class="badge">Production experience at Continental AG / Aumovio</span>
+            </div>
+
+            <div class="hero__timeline">
+              <div>
+                <div class="mini-section-title">Experience</div>
+                <div class="timeline-list">
+                  <div class="timeline-item">
+                    <div class="timeline-title">Production Line Operator · Continental AG / Aumovio</div>
+                    <div class="timeline-meta">
+                      2025 – Present · Kaunas<br />
+                      Observing automated workflows, capturing data for process improvement.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="mini-section-title">Education</div>
+                <div class="timeline-list">
+                  <div class="timeline-item">
+                    <div class="timeline-title">BSc Intelligent Robotics Systems</div>
+                    <div class="timeline-meta">
+                      Kaunas University of Technology<br />
+                      2022 – Present
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-animate id="contact">
+          <div class="section__title-row" style="margin-bottom:8px;">
+            <span class="section__title">Contact & links</span>
+            <span class="section__eyebrow">Let&apos;s build something intelligent</span>
+          </div>
+          <div class="footer__links">
+            <a class="footer__link" href="mailto:am4236428@gmail.com">
+              <span class="dot"></span>
+              <span>Email</span>
+              <span style="color:#e5e7eb;">am4236428@gmail.com</span>
+            </a>
+            <a class="footer__link" href="https://linkedin.com/in/ali-mehdi-a55792238" target="_blank" rel="noreferrer">
+              <span class="dot"></span>
+              <span>LinkedIn</span>
+            </a>
+            <!-- Optional: add GitHub/portfolio once ready -->
+            <!-- <a class="footer__link" href="#" target="_blank" rel="noreferrer">
+              <span class="dot"></span>
+              <span>GitHub</span>
+            </a> -->
+          </div>
+          <p style="margin-top:10px;font-size:11px;color:var(--muted);">
+            Based in Kaunas, Lithuania · open to relocation within the EU and remote-first teams working on robotics, ML, and data products.
+          </p>
+        </article>
+      </aside>
+    </section>
+
+    <!-- Projects + skills -->
+    <section class="section" id="projects">
+      <!-- Projects -->
+      <article class="card" data-animate>
+        <div class="section__title-row">
+          <h2 class="section__title">Selected projects</h2>
+          <span class="section__eyebrow">Signals → models → decisions</span>
+        </div>
+
+        <div class="project-grid">
+          <!-- Pneumonia detection -->
+          <div class="project-card">
+            <div class="project-label-row">
+              <span class="project-chip">
+                <span class="project-chip-dot"></span>
+                <span>Bachelor thesis</span>
+              </span>
+              <span>2025 – Ongoing</span>
+            </div>
+            <h3 class="project-title">Pneumonia detection via deep learning</h3>
+            <p class="project-desc">
+              End-to-end CNN pipeline on chest X-ray images using PyTorch, with transfer learning to handle limited labeled data and improve generalisation across patient cohorts.
+            </p>
+            <p class="project-desc">
+              Currently adding Grad-CAM explainability to visualise model focus regions for clinicians and decision-makers.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag">CNNs</span>
+              <span class="tag">Transfer learning</span>
+              <span class="tag">Grad-CAM</span>
+              <span class="tag">Medical imaging</span>
+            </div>
+          </div>
+
+          <!-- Smart aerosol -->
+          <div class="project-card">
+            <div class="project-label-row">
+              <span class="project-chip">
+                <span class="project-chip-dot"></span>
+                <span>Embedded + dashboard</span>
+              </span>
+              <span>2024</span>
+            </div>
+            <h3 class="project-title">Smart aerosol detection system</h3>
+            <p class="project-desc">
+              Built a laser–photodiode sensor circuit on Arduino Nano and a live web dashboard showing real-time aerosol readings, alerts, and controls.
+            </p>
+            <p class="project-desc">
+              Cleaned and analysed sensor time series to tune thresholds and significantly reduce false positives in testing.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Arduino</span>
+              <span class="tag">Embedded sensors</span>
+              <span class="tag">Time-series analysis</span>
+              <span class="tag">HTML/JS dashboard</span>
+            </div>
+          </div>
+
+          <!-- ABB RobotStudio -->
+          <div class="project-card">
+            <div class="project-label-row">
+              <span class="project-chip">
+                <span class="project-chip-dot"></span>
+                <span>Industrial simulation</span>
+              </span>
+              <span>2024</span>
+            </div>
+            <h3 class="project-title">ABB RobotStudio palletising & sorting</h3>
+            <p class="project-desc">
+              Programmed a virtual palletising line in RAPID, logging performance metrics and validating throughput against predefined KPIs.
+            </p>
+            <p class="project-desc">
+              Explored how process data can feed back into optimisation of industrial robotics behaviour.
+            </p>
+            <div class="project-tags">
+              <span class="tag">ABB RobotStudio</span>
+              <span class="tag">RAPID</span>
+              <span class="tag">Automation</span>
+              <span class="tag">KPI analysis</span>
+            </div>
+          </div>
+
+          <!-- ROS2 robot -->
+          <div class="project-card">
+            <div class="project-label-row">
+              <span class="project-chip">
+                <span class="project-chip-dot"></span>
+                <span>Autonomous navigation</span>
+              </span>
+              <span>2023</span>
+            </div>
+            <h3 class="project-title">ROS2 wall-following robot</h3>
+            <p class="project-desc">
+              Built an ultrasonic sensor–based navigation stack in ROS2, enabling a robot to follow walls autonomously while streaming telemetry to RViz.
+            </p>
+            <p class="project-desc">
+              Focused on robust sensor fusion, behaviour control, and visual feedback for debugging.
+            </p>
+            <div class="project-tags">
+              <span class="tag">ROS2</span>
+              <span class="tag">Ultrasonic sensing</span>
+              <span class="tag">Autonomous control</span>
+              <span class="tag">RViz</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Skills & certifications -->
+      <aside class="section__skills">
+        <article class="card" data-animate>
+          <div class="section__title-row">
+            <h2 class="section__title">Tech stack snapshot</h2>
+            <span class="section__eyebrow">Hands-on in code, sensors & cloud</span>
+          </div>
+
+          <div class="skills-grid">
+            <div>
+              <div class="skill-chip">
+                <span class="label">Python & data</span>
+                <span class="value">Daily driver</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar-fill skill-bar-fill--85" style="width:85%;"></div>
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px;">
+                NumPy, Pandas, scikit-learn, Matplotlib, data cleaning & visual analytics.
+              </div>
+            </div>
+
+            <div>
+              <div class="skill-chip">
+                <span class="label">ML & DL</span>
+                <span class="value">Academic + projects</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar-fill skill-bar-fill--80" style="width:80%;"></div>
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px;">
+                Supervised/unsupervised learning, CNNs, transfer learning, classification and regression.
+              </div>
+            </div>
+
+            <div>
+              <div class="skill-chip">
+                <span class="label">Cloud & tools</span>
+                <span class="value">AI-900</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar-fill skill-bar-fill--70" style="width:70%;"></div>
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px;">
+                Microsoft Azure fundamentals, Git, Linux, basic SQL.
+              </div>
+            </div>
+
+            <div>
+              <div class="skill-chip">
+                <span class="label">Hardware & robotics</span>
+                <span class="value">Project-proven</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-bar-fill skill-bar-fill--60" style="width:75%;"></div>
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px;">
+                Arduino, embedded sensors, ABB RobotStudio, ROS2 navigation, real-time dashboards.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-animate>
+          <div class="section__title-row">
+            <h2 class="section__title">Certifications</h2>
+            <span class="section__eyebrow">Learning is a continuous system</span>
+          </div>
+          <div class="cert-list">
+            <div class="cert-item">
+              <span class="name">Microsoft Azure AI-900 · Azure AI Fundamentals</span>
+              <span class="tag">Cloud AI</span>
+            </div>
+            <div class="cert-item">
+              <span class="name">Cisco CyberOps Associate</span>
+              <span class="tag">Security</span>
+            </div>
+            <div class="cert-item">
+              <span class="name">Huawei AI Talent Program</span>
+              <span class="tag">AI talent</span>
+            </div>
+          </div>
+        </article>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Ali Mehdi · Intelligent Robotics & ML</span>
+      <div class="footer__links">
+        <span class="footer__link" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+          <span class="dot"></span>
+          <span>Back to top</span>
+        </span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Reveal on scroll
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy email button
+    const emailBtn = document.getElementById('emailBtn');
+    if (emailBtn) {
+      emailBtn.addEventListener('click', async () => {
+        const email = 'am4236428@gmail.com';
+        try {
+          await navigator.clipboard.writeText(email);
+          const original = emailBtn.innerHTML;
+          emailBtn.innerHTML = '<span class="icon">✓</span><span>Email copied</span>';
+          setTimeout(() => (emailBtn.innerHTML = original), 1500);
+        } catch (e) {
+          window.location.href = 'mailto:' + email;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
