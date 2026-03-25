@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Ali Mehdi – Intelligent Robotics & ML Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio of Ali Mehdi – Intelligent Robotics, Machine Learning and Data-driven systems." />
+  <meta name="description" content="Portfolio of Ali Mehdi – Intelligent Robotics, Machine Learning and data-driven systems." />
   <style>
     :root {
       --bg: #050816;
@@ -41,7 +41,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -65,7 +64,6 @@
       position: relative;
     }
 
-    /* Floating gradient orbs */
     .orb {
       position: fixed;
       border-radius: 999px;
@@ -109,7 +107,6 @@
       to { transform: translate3d(30px, 60px, 0); opacity: 0.5; }
     }
 
-    /* Top bar */
     .nav {
       display: flex;
       align-items: center;
@@ -182,6 +179,7 @@
       font-size: 10px;
       cursor: pointer;
       transition: all var(--transition-med);
+      background: transparent;
     }
 
     .chip--primary {
@@ -197,7 +195,6 @@
       box-shadow: 0 8px 26px rgba(15, 23, 42, 0.9);
     }
 
-    /* Layout */
     .hero {
       display: grid;
       grid-template-columns: 3fr 2.4fr;
@@ -215,7 +212,6 @@
       }
     }
 
-    /* Cards */
     .card {
       background: radial-gradient(circle at top left, rgba(15,23,42,0.96), rgba(3,7,18,0.98));
       border-radius: var(--radius-lg);
@@ -397,17 +393,12 @@
       gap: 14px;
     }
 
+    /* UPDATED: stacked card to avoid overlap */
     .hero__avatar-card {
-      display: grid;
-      grid-template-columns: 1.15fr 1.6fr;
+      display: flex;
+      flex-direction: column;
       gap: 18px;
-      align-items: center;
-    }
-
-    @media (max-width: 640px) {
-      .hero__avatar-card {
-        grid-template-columns: 1fr;
-      }
+      align-items: stretch;
     }
 
     .avatar-frame {
@@ -550,7 +541,6 @@
       color: var(--muted);
     }
 
-    /* Section: Projects and skills */
     .section {
       margin-top: 32px;
       display: grid;
@@ -759,7 +749,6 @@
       color: #bfdbfe;
     }
 
-    /* Footer */
     .footer {
       margin-top: 28px;
       display: flex;
@@ -804,7 +793,6 @@
       background: radial-gradient(circle, #22d3ee, #4f46e5);
     }
 
-    /* Enter animations */
     [data-animate] {
       opacity: 0;
       transform: translateY(12px);
@@ -816,7 +804,6 @@
       transform: translateY(0);
     }
 
-    /* Smooth section spacing on small screens */
     @media (max-width: 640px) {
       main {
         padding-inline: 16px;
@@ -833,7 +820,6 @@
   <div class="orb orb--3"></div>
 
   <main>
-    <!-- Top nav -->
     <header class="nav">
       <div class="nav__left">
         <div class="nav__badge">AM</div>
@@ -852,7 +838,6 @@
       </div>
     </header>
 
-    <!-- Hero -->
     <section class="hero">
       <article class="card card--highlight" data-animate>
         <div class="pill-row">
@@ -897,8 +882,8 @@
         </div>
       </article>
 
-      <!-- Hero right panel -->
       <aside class="hero__right">
+        <!-- UPDATED AVATAR CARD -->
         <article class="card hero__avatar-card" data-animate>
           <div class="avatar-frame">
             <div class="avatar-inner">
@@ -917,7 +902,7 @@
             </div>
           </div>
 
-          <div class="hero__avatar-meta">
+          <div class="hero__avatar-meta" style="margin-top:14px;">
             <div class="hero__badge-row">
               <span class="badge badge--accent">Bachelor thesis: Deep learning for pneumonia detection</span>
               <span class="badge">Production experience at Continental AG / Aumovio</span>
@@ -968,11 +953,6 @@
               <span class="dot"></span>
               <span>LinkedIn</span>
             </a>
-            <!-- Optional: add GitHub/portfolio once ready -->
-            <!-- <a class="footer__link" href="#" target="_blank" rel="noreferrer">
-              <span class="dot"></span>
-              <span>GitHub</span>
-            </a> -->
           </div>
           <p style="margin-top:10px;font-size:11px;color:var(--muted);">
             Based in Kaunas, Lithuania · open to relocation within the EU and remote-first teams working on robotics, ML, and data products.
@@ -981,9 +961,7 @@
       </aside>
     </section>
 
-    <!-- Projects + skills -->
     <section class="section" id="projects">
-      <!-- Projects -->
       <article class="card" data-animate>
         <div class="section__title-row">
           <h2 class="section__title">Selected projects</h2>
@@ -991,7 +969,6 @@
         </div>
 
         <div class="project-grid">
-          <!-- Pneumonia detection -->
           <div class="project-card">
             <div class="project-label-row">
               <span class="project-chip">
@@ -1017,7 +994,6 @@
             </div>
           </div>
 
-          <!-- Smart aerosol -->
           <div class="project-card">
             <div class="project-label-row">
               <span class="project-chip">
@@ -1041,7 +1017,6 @@
             </div>
           </div>
 
-          <!-- ABB RobotStudio -->
           <div class="project-card">
             <div class="project-label-row">
               <span class="project-chip">
@@ -1065,7 +1040,6 @@
             </div>
           </div>
 
-          <!-- ROS2 robot -->
           <div class="project-card">
             <div class="project-label-row">
               <span class="project-chip">
@@ -1091,7 +1065,6 @@
         </div>
       </article>
 
-      <!-- Skills & certifications -->
       <aside class="section__skills">
         <article class="card" data-animate>
           <div class="section__title-row">
@@ -1189,7 +1162,6 @@
   </main>
 
   <script>
-    // Reveal on scroll
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
@@ -1204,10 +1176,8 @@
 
     document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 
-    // Dynamic year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Copy email button
     const emailBtn = document.getElementById('emailBtn');
     if (emailBtn) {
       emailBtn.addEventListener('click', async () => {
